@@ -10,6 +10,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'faraday'
 gem 'figaro'
 gem 'graphql'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'pry'
