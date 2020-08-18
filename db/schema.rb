@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_163309) do
+ActiveRecord::Schema.define(version: 2020_08_18_163635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bids", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
+    t.float "amount"
+    t.boolean "winner", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_bids_on_item_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -43,5 +54,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_163309) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "bids", "items"
+  add_foreign_key "bids", "users"
   add_foreign_key "items", "users"
 end
