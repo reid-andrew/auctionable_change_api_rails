@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_163635) do
+ActiveRecord::Schema.define(version: 2020_08_18_163800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bid_details", force: :cascade do |t|
+    t.bigint "bid_id", null: false
+    t.string "street_address"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.string "receipt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bid_id"], name: "index_bid_details_on_bid_id"
+  end
 
   create_table "bids", force: :cascade do |t|
     t.bigint "item_id", null: false
@@ -54,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_163635) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "bid_details", "bids"
   add_foreign_key "bids", "items"
   add_foreign_key "bids", "users"
   add_foreign_key "items", "users"
