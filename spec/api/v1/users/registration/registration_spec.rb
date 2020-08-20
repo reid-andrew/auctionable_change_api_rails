@@ -84,4 +84,21 @@ RSpec.describe 'Registration Endpoint - ', type: :request do
     expect(response.status).to eq(400)
     expect(output[:data][:attributes][:error]).to eq("Complete all fields.")
   end
+
+  it 'checks for other errors before registration' do
+    post '/api/v1/users', params:
+      {
+        'first_name': 'Mick',
+        'last_name': 'Jones',
+        'email': 'not_an_email_address',
+        'password': 'pw123',
+        'password_confirmation': 'pw123'
+      }
+
+    output = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+    expect(output[:data][:attributes][:error]).to eq("Something went wrong. Please double check your email and password and try again.")
+  end
 end
