@@ -6,7 +6,7 @@ RSpec.describe 'Registration Endpoint - ', type: :request do
   end
 
   it 'registers a user' do
-    post 'api/v1/users', params:
+    post '/api/v1/users', params:
       {
         'first_name': 'Joe',
         'last_name': 'Strummer',
