@@ -17,5 +17,4 @@ class User < ApplicationRecord
 
     'Something went wrong. Please double check your email and password and try again.'
   end
-
 end
