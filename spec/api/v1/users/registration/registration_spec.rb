@@ -15,6 +15,7 @@ RSpec.describe 'Registration Endpoint - ', type: :request do
         'password_confirmation': 'pw123'
       }
 
+    require "pry"; binding.pry
     output = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
