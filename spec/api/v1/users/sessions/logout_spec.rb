@@ -21,16 +21,13 @@ RSpec.describe 'Login Endpoint - ', type: :request do
   it 'logs out a user' do
     expect(session[:user_id]).to eq(@user.id)
 
-    delete '/api/v1/sessions', params:
-      {
-        'email': 'whatever@example.com'
-      }
+    delete "/api/v1/sessions/#{@user.id}"
 
     output = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
-    expect(output[:data][:attributes][:message]).to eq('Successfully logged out')
+    expect(output[:data][:attributes][:message]).to eq('Successfully logged out.')
     expect(session[:user_id]).to eq(nil)
   end
 
