@@ -11,6 +11,11 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.clear
+    render '/logout/logged_out.json', status: :ok
+  end
+
   private
 
   def session_params
